@@ -16,19 +16,13 @@ import axios from "axios";
   ```
 */
 function Example() {
-  const handleSubmit = (event: { preventDefault: () => void }) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("Form submitted:");
-
-    axios
-      .get("http://localhost:3000")
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
+    const response = await axios.get("http://localhost:3000").catch((error) => {
+      console.error(error);
+    });
+    console.log(response);
   };
   return (
     <>
@@ -65,7 +59,6 @@ function Example() {
                 <input
                   id="email"
                   name="email"
-                  type="email"
                   required
                   autoComplete="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
