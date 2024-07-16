@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { forwardRef, useRef } from 'react';
 import "./App.css";
 import axios from "axios";
 /*
@@ -15,15 +15,23 @@ import axios from "axios";
   }
   ```
 */
+const MyInput = forwardRef((props, ref) => {
+  const { label, ...otherProps } = props;
+  return <input {...props} ref={ref} className={props.className} />;
+});
 function Example() {
+  const EmailRef = useRef(null);
+  
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log("Form submitted:");
+    console.log(EmailRef.current.value);
     const response = await axios.get("http://localhost:3000").catch((error) => {
       console.error(error);
     });
-    console.log(response);
+    
+    
   };
+
   return (
     <>
       {/*
@@ -45,7 +53,6 @@ function Example() {
             Sign in to your account
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -56,11 +63,8 @@ function Example() {
                 Email address
               </label>
               <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  required
-                  autoComplete="email"
+                <MyInput
+                 ref={EmailRef}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
