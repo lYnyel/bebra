@@ -21,14 +21,16 @@ const MyInput = forwardRef((props, ref) => {
 });
 function Example() {
   const EmailRef = useRef(null);
-  
+  const PassRef = useRef(null);
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    const Payload = {username:EmailRef.current.value, password:PassRef.current.value};
     console.log(EmailRef.current.value);
-    const response = await axios.get("http://localhost:3000").catch((error) => {
+    console.log(PassRef.current.value);
+    const response = await axios.post("http://localhost:3000/users/login",Payload).catch((error) => {
       console.error(error);
     });
-    
+    console.log(response);
     
   };
 
@@ -88,12 +90,8 @@ function Example() {
                 </div>
               </div>
               <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
+                <MyInput
+                ref = {PassRef}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
