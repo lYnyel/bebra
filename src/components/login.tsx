@@ -18,7 +18,7 @@ const MyInput = forwardRef((props, ref) => {
   const { label, ...otherProps } = props;
   return <input {...props} ref={ref} className={props.className} />;
 });
-export default function Example() {
+export default function Login() {
   const EmailRef = useRef(null);
   const PassRef = useRef(null);
   const handleSubmit = async (event: { preventDefault: () => void }) => {
