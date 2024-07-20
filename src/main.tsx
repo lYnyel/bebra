@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import Login from "./components/login.tsx";
 import Logout from './components/logout.tsx';
+import Regiister from './components/register.tsx';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "logout",
     element: <Logout></Logout>
+  },
+  {
+    path: "Register",
+    element: <Regiister></Regiister>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
