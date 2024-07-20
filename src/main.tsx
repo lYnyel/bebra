@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   {
     path: "logout",
     element: <Logout></Logout>
-  },
+  }, 
   {
     path: "Register",
     element: <Regiister></Regiister>

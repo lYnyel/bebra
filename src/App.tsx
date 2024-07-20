@@ -2,6 +2,7 @@ import axios from "axios";
 import "./App.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ function App() {
     // POST request using axios inside useEffect React hook
     axios
       .get("https://lobster.1337.moe/api/auth/user", {
-        withCredentials: true
+        withCredentials: true,
       })
       .then((response) => setUsername(response.data.name));
 
@@ -33,9 +34,21 @@ function App() {
             <Link to="/register">Register</Link>
           </li>
           <li>
-          <Link to="/logout">Logout</Link>
+            <Link to="/logout">Logout</Link>
           </li>
-          {username && <li>{username}</li>}
+          {username && (
+            <li>
+              <Popover className="relative">
+                <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                  <span>{username}</span>
+                </PopoverButton>
+                <PopoverPanel
+                  transition
+                  className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                >asdasd</PopoverPanel>
+              </Popover>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
