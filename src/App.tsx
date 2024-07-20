@@ -8,10 +8,11 @@ function App() {
 
   useEffect(() => {
     // POST request using axios inside useEffect React hook
-    const article = { title: "React Hooks POST Request Example" };
     axios
-      .post("http://localhost:3000/users/me", article)
-      .then((response) => setUsername(response.data.username));
+      .get("https://lobster.1337.moe/api/auth/user", {
+        withCredentials: true
+      })
+      .then((response) => setUsername(response.data.name));
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
@@ -31,7 +32,6 @@ function App() {
           <li>
             <Link to="/register">Register</Link>
           </li>
-          <li>{username}</li>
           <li>
           <Link to="/logout">Logout</Link>
           </li>

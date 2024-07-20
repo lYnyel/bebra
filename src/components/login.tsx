@@ -24,13 +24,15 @@ export default function Login() {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     const Payload = {
-      username: EmailRef.current.value,
+      email: EmailRef.current.value,
       password: PassRef.current.value,
     };
     console.log(EmailRef.current.value);
     console.log(PassRef.current.value);
     const response = await axios
-      .post("http://localhost:3000/users/login", Payload)
+      .post("https://lobster.1337.moe/api/auth/login", Payload, {
+        withCredentials: true
+      })
       .catch((error) => {
         console.error(error);
       });
